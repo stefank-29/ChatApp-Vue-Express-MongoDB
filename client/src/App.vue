@@ -1,10 +1,5 @@
 <template>
     <div id="app">
-        <!-- <div id="nav">
-            <router-link to="/">Home</router-link>
-            <router-link :to="{ name: 'Register' }">Register</router-link>
-            <router-link :to="{ name: 'Login' }">Login</router-link>
-        </div> -->
         <Header />
         <router-view />
     </div>
@@ -12,9 +7,27 @@
 
 <script>
 import Header from '@/components/Header';
+import AuthenticationService from '@/services/AuthenticationService';
+import { mapActions } from 'vuex';
 export default {
     components: {
         Header,
+    },
+    methods: {
+        ...mapActions(['setUser']),
+    },
+    async created() {
+        try {
+            const response = await AuthenticationService.isLoggedIn();
+            if (response.data.user) {
+                const payload = { user: response.data.user, gravatar: response.data.gravatar };
+                this.setUser(payload);
+            } else {
+                console.log('No logged user');
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
     },
 };
 </script>

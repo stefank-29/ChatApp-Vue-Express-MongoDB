@@ -15,14 +15,24 @@
                     </li>
                 </div>
                 <div class="nav__section nav__section--user">
-                    <li class="nav__item">
+                    <li v-if="!$store.state.isUserLoggedIn" class="nav__item">
                         <router-link :to="{ name: 'Register' }" class="nav__link">
                             Register
                         </router-link>
                     </li>
-                    <li class="nav__item">
+                    <li v-if="!$store.state.isUserLoggedIn" class="nav__item">
                         <router-link :to="{ name: 'Login' }" class="nav__link">
                             Login
+                        </router-link>
+                    </li>
+                    <li @click="logout" v-if="$store.state.isUserLoggedIn" class="nav__item">
+                        <router-link to="/logout" class="nav__link">
+                            Logout
+                        </router-link>
+                    </li>
+                    <li v-if="$store.state.isUserLoggedIn" class="nav__item">
+                        <router-link to="/account" class="nav__link">
+                            <img class="avatar" :src="$store.state.gravatar" alt="" />
                         </router-link>
                     </li>
                 </div>
@@ -32,15 +42,23 @@
 </template>
 
 <script>
-//todo provera da l je user ulogovan
+import { mapActions } from 'vuex';
 export default {
     name: 'Header',
+    methods: {
+        ...mapActions(['removeUser']),
+        async logout() {
+            this.removeUser();
+            this.$router.push({ name: 'Home' });
+        },
+    },
     data() {
         return {
             menu: [
                 { slug: '/chats', title: 'Chats', icon: 'chat' },
                 { slug: '/contacts', title: 'Contacts', icon: 'contact' },
             ],
+            gravatar: this.$store.state.gravatar,
         };
     },
 };

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const promisify = require('es6-promisify');
 
-exports.validateRegister = (req, res, next) => {
+exports.validateRegister = async (req, res, next) => {
     req.checkBody('username', 'You must enter a name').notEmpty();
     req.checkBody('email', 'Email is not valid!').isEmail();
     req.sanitizeBody('email').normalizeEmail({
@@ -17,13 +17,26 @@ exports.validateRegister = (req, res, next) => {
     req.checkBody('password-confirm', 'Your password do not match!').equals(req.body.password);
     const errors = req.validationErrors();
     if (errors) {
-        res.send({ errors }); // saljem greske
-    } else {
-        next();
+        res.send({ errors, error: true }); // saljem greske
+        return;
     }
+    let user = await User.findOne({ username: req.body.username });
+    if (user) {
+        res.send({ error: 'User with that username already exists' });
+        return;
+    }
+
+    user = await User.findOne({ email: req.body.email });
+    if (user) {
+        res.send({ errors: ['That email address is already in use'], error: true });
+
+        return;
+    }
+
+    next();
 };
 
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
     const user = await new User({
         username: req.body.username,
         email: req.body.email,

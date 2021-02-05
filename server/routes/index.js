@@ -12,4 +12,9 @@ router.post(
     authController.sendUser
 );
 
+router.post('/login', authController.login, authController.sendUser);
+router.get('/logout', authController.logout);
+
+router.get('/user', authController.isUserLoggedIn);
+
 module.exports = router;

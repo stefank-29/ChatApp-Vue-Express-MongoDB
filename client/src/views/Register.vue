@@ -1,6 +1,8 @@
 <template>
     <div class="inner">
-        <form @submit.prevent="register" action="/register" class="form card" autocomplete="off">
+        <label for="user">{{ user }}*</label>
+
+        <form @submit.prevent="register" action="/register" class="form card">
             <h2>Register</h2>
             <label for="username">Username*</label>
             <input v-model="username" type="text" name="username" required />
@@ -20,7 +22,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import AuthenticationService from '@/services/AuthenticationService';
+import { mapActions, mapState } from 'vuex';
 export default {
     name: 'Register',
     data() {
@@ -35,7 +38,35 @@ export default {
         };
     },
     methods: {
-        async register() {},
+        ...mapActions(['setUser']),
+        async register() {
+            let response;
+            try {
+                response = await AuthenticationService.register({
+                    username: this.username,
+                    name: this.name,
+                    surname: this.surname,
+                    email: this.email,
+                    password: this.password,
+                    'password-confirm': this.confirm_password,
+                });
+                if (!response.data.error) {
+                    // redirekt na home i postaviti da je user ulogovan
+                    const payload = { user: response.data.user, gravatar: response.data.gravatar };
+                    this.setUser(payload);
+                    this.$router.push({ name: 'Home' });
+                } else {
+                    // baciti greske i ne redirektovati
+                    // error = true
+                    // prodjem kroz niz sa greskama (response.data.errors)
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        },
+    },
+    computed: {
+        ...mapState(['user', 'isUserLoggedIn']),
     },
 };
 </script>
