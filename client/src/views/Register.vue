@@ -1,7 +1,5 @@
 <template>
     <div class="inner">
-        <label for="user">{{ user }}*</label>
-
         <form @submit.prevent="register" action="/register" class="form card">
             <h2>Register</h2>
             <label for="username">Username*</label>

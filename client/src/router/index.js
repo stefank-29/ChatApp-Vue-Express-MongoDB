@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import NotFound from '../views/NotFound.vue';
+import AddProduct from '../views/AddProduct.vue';
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,11 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login,
+    },
+    {
+        path: '/addproduct',
+        name: 'Add Product',
+        component: AddProduct,
     },
 
     //* redirect

@@ -13,6 +13,11 @@
                             {{ item.title }}
                         </router-link>
                     </li>
+                    <li class="nav__item">
+                        <router-link :to="{ name: 'Add Product' }" class="nav__link">
+                            Add product
+                        </router-link>
+                    </li>
                 </div>
                 <div class="nav__section nav__section--user">
                     <li v-if="!$store.state.isUserLoggedIn" class="nav__item">
@@ -55,8 +60,8 @@ export default {
     data() {
         return {
             menu: [
-                { slug: '/chats', title: 'Chats', icon: 'chat' },
-                { slug: '/contacts', title: 'Contacts', icon: 'contact' },
+                { slug: '/products', title: 'Products', icon: 'product' },
+                // { slug: '/contacts', title: 'Contacts', icon: 'contact' },
             ],
             gravatar: this.$store.state.gravatar,
         };
