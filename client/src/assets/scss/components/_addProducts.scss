@@ -1,0 +1,12 @@
+select {
+    width: 30%;
+    background-color: whitesmoke;
+}
+.sizes {
+    display: flex;
+    flex-wrap: wrap;
+}
+.size {
+    width: 10%;
+    margin: 1rem 2rem 1rem 0rem;
+}

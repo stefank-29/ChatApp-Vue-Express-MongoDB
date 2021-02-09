@@ -3,9 +3,14 @@ const Product = mongoose.model('Product');
 const Size = mongoose.model('Size');
 
 exports.addProduct = async (req, res) => {
-    console.log(req.body);
     const sizes = [];
-    for (let i = 0; i < 10; i++) {
+    let n = 0;
+    if (req.body.gender === 'male' || req.body.gender === 'female') {
+        n = 10;
+    } else {
+        n = 15;
+    }
+    for (let i = 0; i < n; i++) {
         sizes.push(
             await new Size({
                 number: req.body.sizes[i].number,
@@ -20,4 +25,10 @@ exports.addProduct = async (req, res) => {
         sizes: sizes,
     });
     await product.save();
+    res.status(200).send();
+};
+
+exports.getProducts = async (req, res) => {
+    const products = await Product.find({});
+    res.send(products);
 };

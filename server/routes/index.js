@@ -20,7 +20,7 @@ router.get('/user', authController.isUserLoggedIn);
 
 // Products
 
-router.get('/products');
+router.get('/products', productController.getProducts);
 router.post('/products', productController.addProduct);
 
 module.exports = router;

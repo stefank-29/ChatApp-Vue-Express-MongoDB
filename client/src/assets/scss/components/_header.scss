@@ -8,9 +8,6 @@
 
     &__section {
         display: flex;
-        &--search {
-            flex: 1 1 auto;
-        }
     }
     &__item {
         display: flex;
@@ -18,11 +15,13 @@
         justify-content: center;
     }
     &__link {
-        height: 8rem;
-        font-family: 'Roboto', sans-serif;
+        max-width: 15rem;
+        position: relative;
+        height: 9rem;
+        font-family: 'Avenir', sans-serif;
         font-weight: 600;
-        font-size: 1.5rem;
-        padding: 2rem 2rem;
+        font-size: 1.4rem;
+        padding: 2rem 2.5rem;
         background: $blue;
         color: white;
         border-right: 1px solid rgba(255, 255, 255, 0.1);
@@ -52,14 +51,21 @@
             background: $lightblue fixed;
         }
         &--logo {
+            padding: 0;
+
             &:hover {
-                svg {
-                    transform: none;
+                background: none;
+                img {
+                    transform: scale(1.05);
                 }
             }
             img {
-                width: 40px;
+                height: auto;
+                max-width: 100%;
                 margin: 0;
+            }
+            &.router-link-exact-active {
+                background: none;
             }
         }
     }

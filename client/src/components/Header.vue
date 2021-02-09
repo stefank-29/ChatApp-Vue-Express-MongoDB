@@ -5,7 +5,7 @@
                 <div class="nav__section nav__section--pages">
                     <li class="nav__item">
                         <router-link :to="{ name: 'Home' }" class="nav__link nav__link--logo">
-                            <img src="@/assets/images/whatsapp.svg" alt="" />
+                            <img src="@/assets/images/logo1.png" alt="" />
                         </router-link>
                     </li>
                     <li v-for="item in menu" :key="item.title" class="nav__item">

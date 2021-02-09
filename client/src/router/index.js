@@ -5,6 +5,7 @@ import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import NotFound from '../views/NotFound.vue';
 import AddProduct from '../views/AddProduct.vue';
+import Products from '../views/Products.vue';
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ const routes = [
         path: '/addproduct',
         name: 'Add Product',
         component: AddProduct,
+    },
+    {
+        path: '/products',
+        name: 'Products',
+        component: Products,
     },
 
     //* redirect
