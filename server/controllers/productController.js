@@ -21,15 +21,17 @@ const multerOptions = {
 exports.upload = multer(multerOptions).single('file');
 
 exports.resize = async (req, res, next) => {
-    console.log(req.body);
-    console.log(req.file);
-
     if (!req.file) {
-        console.log('slikaaaa');
         next();
         return;
     }
-    console.log(req.body);
+    const extension = req.file.mimetype.split('/')[1];
+    req.body.photo = `${uuid.v4()}.${extension}`; // unique name
+    const photo = await jimp.read(req.file.buffer);
+    await photo.resize(800, jimp.AUTO);
+    await photo.write(`./public/uploads/${req.body.photo}`);
+    req.body.sizes = JSON.parse(req.body.sizes); // deserijalizacija
+    next();
 };
 
 exports.addProduct = async (req, res) => {
@@ -53,6 +55,7 @@ exports.addProduct = async (req, res) => {
         price: req.body.price,
         gender: req.body.gender,
         sizes: sizes,
+        image: req.body.photo,
     });
     await product.save();
     res.status(200).send();

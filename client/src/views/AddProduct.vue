@@ -64,16 +64,10 @@ export default {
                 formData.append('file', this.SelectedFile);
                 formData.append('name', this.name);
                 formData.append('price', this.price);
-                // formData.append('file', this.SelectedFile);
+                formData.append('gender', this.gender);
+                formData.append('sizes', JSON.stringify(this.sizes)); // serijalizacija
 
-                const response = await ProductsService.addProduct(
-                    formData
-                    // name: this.name,
-                    // file: form,
-                    // price: this.price,
-                    // gender: this.gender,
-                    // sizes: [...this.sizes],
-                );
+                const response = await ProductsService.addProduct(formData);
                 if (response.status === 200) {
                     this.$router.push({ name: 'Home' });
                 }

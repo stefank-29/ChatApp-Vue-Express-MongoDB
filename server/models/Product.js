@@ -12,6 +12,9 @@ const productShema = new Schema({
         type: Number,
         required: true,
     },
+    photo: {
+        type: String,
+    },
     gender: {
         type: String,
     },
