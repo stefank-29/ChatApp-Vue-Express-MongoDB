@@ -18,10 +18,11 @@ const multerOptions = {
     },
 };
 
-exports.upload = multer(multerOptions).single('photo');
+exports.upload = multer(multerOptions).single('file');
 
 exports.resize = async (req, res, next) => {
     console.log(req.body);
+    console.log(req.file);
 
     if (!req.file) {
         console.log('slikaaaa');

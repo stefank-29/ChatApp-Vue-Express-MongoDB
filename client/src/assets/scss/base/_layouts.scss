@@ -5,6 +5,9 @@ html {
 body {
     background: $purple;
     background: #efefef;
+    background: url('../../assets/images/sneakers-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+
     &:before {
         content: '';
         display: block;
@@ -13,19 +16,6 @@ body {
         width: 100%;
     }
 }
-body::after {
-    content: '';
-    background: url('../../assets/images/sneakers-bg.jpg') no-repeat center center fixed;
-    background-size: cover;
-    opacity: 0.95;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-}
-
 .inner {
     max-width: 1150px;
     margin: 0 auto;

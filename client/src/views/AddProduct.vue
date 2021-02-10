@@ -12,8 +12,8 @@
                 <option value="female">Female</option>
                 <option value="unisex">Unisex</option>
             </select>
-            <div class="sizes">
-                <div class="size" v-for="(size, index) in sizes" :key="size.number">
+            <div class="sizes__inputs">
+                <div class="size__input" v-for="(size, index) in sizes" :key="size.number">
                     <label for="size">Size {{ size.number }}</label>
                     <input type="number" v-model="sizes[index].quantity" />
                 </div>
@@ -26,6 +26,7 @@
 
 <script>
 import ProductsService from '@/services/ProductsService';
+import FormData from 'form-data';
 export default {
     name: 'AddProduct',
     data() {
@@ -33,6 +34,7 @@ export default {
             name: '',
             price: '',
             gender: 'unisex',
+            SelectedFile: '',
             sizes: [
                 { number: 33, quantity: 0 },
                 { number: 34, quantity: 0 },
@@ -59,19 +61,18 @@ export default {
         async addProduct() {
             try {
                 const formData = new FormData();
-                formData.append('file', this.SelectedFile, this.SelectedFile.name);
+                formData.append('file', this.SelectedFile);
+                formData.append('name', this.name);
+                formData.append('price', this.price);
+                // formData.append('file', this.SelectedFile);
 
-                const slika = { ...this.SelectedFile };
                 const response = await ProductsService.addProduct(
-                    {
-                        name: this.name,
-                        formData,
-
-                        price: this.price,
-                        gender: this.gender,
-                        sizes: [...this.sizes],
-                    },
                     formData
+                    // name: this.name,
+                    // file: form,
+                    // price: this.price,
+                    // gender: this.gender,
+                    // sizes: [...this.sizes],
                 );
                 if (response.status === 200) {
                     this.$router.push({ name: 'Home' });

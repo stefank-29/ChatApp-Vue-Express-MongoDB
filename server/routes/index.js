@@ -21,7 +21,12 @@ router.get('/user', authController.isUserLoggedIn);
 // Products
 
 router.get('/products', productController.getProducts);
-router.post('/products', productController.addProduct);
+router.post(
+    '/products',
+    productController.upload,
+    productController.resize,
+    productController.addProduct
+);
 
 router.get('/products/:id', productController.getSingleProduct);
 
