@@ -2,6 +2,35 @@ const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 const Size = mongoose.model('Size');
 
+const multer = require('multer');
+const jimp = require('jimp');
+const uuid = require('uuid');
+
+const multerOptions = {
+    storage: multer.memoryStorage(),
+    fileFilter(req, file, next) {
+        const isPhoto = file.mimetype.startsWith('image/');
+        if (isPhoto) {
+            next(null, true);
+        } else {
+            next({ message: 'Error' }, false);
+        }
+    },
+};
+
+exports.upload = multer(multerOptions).single('photo');
+
+exports.resize = async (req, res, next) => {
+    console.log(req.body);
+
+    if (!req.file) {
+        console.log('slikaaaa');
+        next();
+        return;
+    }
+    console.log(req.body);
+};
+
 exports.addProduct = async (req, res) => {
     const sizes = [];
     let n = 0;
@@ -31,4 +60,10 @@ exports.addProduct = async (req, res) => {
 exports.getProducts = async (req, res) => {
     const products = await Product.find({});
     res.send(products);
+};
+
+exports.getSingleProduct = async (req, res) => {
+    const id = req.params.id;
+    const product = await Product.find({ _id: id }).populate('sizes');
+    res.send({ product: product });
 };

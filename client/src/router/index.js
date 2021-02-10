@@ -6,6 +6,7 @@ import Login from '../views/Login.vue';
 import NotFound from '../views/NotFound.vue';
 import AddProduct from '../views/AddProduct.vue';
 import Products from '../views/Products.vue';
+import Product from '../views/Product.vue';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [
         path: '/products',
         name: 'Products',
         component: Products,
+    },
+    {
+        path: '/products/:id',
+        name: 'Product',
+        component: Product,
     },
 
     //* redirect

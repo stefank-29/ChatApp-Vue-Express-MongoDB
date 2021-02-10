@@ -18,7 +18,7 @@
                     <input type="number" v-model="sizes[index].quantity" />
                 </div>
             </div>
-
+            <input type="file" @change="onFileSelected" />
             <input type="submit" value="Add Product" name="add" class="button save" />
         </form>
     </div>
@@ -53,14 +53,26 @@ export default {
         };
     },
     methods: {
+        onFileSelected(event) {
+            this.SelectedFile = event.target.files[0];
+        },
         async addProduct() {
             try {
-                const response = await ProductsService.addProduct({
-                    name: this.name,
-                    price: this.price,
-                    gender: this.gender,
-                    sizes: [...this.sizes],
-                });
+                const formData = new FormData();
+                formData.append('file', this.SelectedFile, this.SelectedFile.name);
+
+                const slika = { ...this.SelectedFile };
+                const response = await ProductsService.addProduct(
+                    {
+                        name: this.name,
+                        formData,
+
+                        price: this.price,
+                        gender: this.gender,
+                        sizes: [...this.sizes],
+                    },
+                    formData
+                );
                 if (response.status === 200) {
                     this.$router.push({ name: 'Home' });
                 }

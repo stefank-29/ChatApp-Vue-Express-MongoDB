@@ -7,4 +7,7 @@ export default {
     getProducts() {
         return Api().get('/products');
     },
+    getSingleProduct(id) {
+        return Api().get(`/products/${id}`);
+    },
 };

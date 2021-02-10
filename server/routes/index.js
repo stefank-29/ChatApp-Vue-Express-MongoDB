@@ -23,4 +23,6 @@ router.get('/user', authController.isUserLoggedIn);
 router.get('/products', productController.getProducts);
 router.post('/products', productController.addProduct);
 
+router.get('/products/:id', productController.getSingleProduct);
+
 module.exports = router;
