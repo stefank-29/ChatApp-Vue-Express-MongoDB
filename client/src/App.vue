@@ -2,6 +2,11 @@
     <div id="app">
         <Header />
         <router-view />
+        <a href="#app">
+            <div class="topButton">
+                <font-awesome-icon :icon="['fas', 'chevron-up']" />
+            </div>
+        </a>
     </div>
 </template>
 
@@ -15,6 +20,16 @@ export default {
     },
     methods: {
         ...mapActions(['setUser']),
+        scrollToTop() {
+            const scrollBtn = document.querySelector('.topButton');
+
+            let y = window.scrollY;
+            if (y >= 400) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        },
     },
     async created() {
         try {
@@ -28,6 +43,8 @@ export default {
         } catch (error) {
             console.log(error.message);
         }
+
+        window.addEventListener('scroll', this.scrollToTop);
     },
 };
 </script>

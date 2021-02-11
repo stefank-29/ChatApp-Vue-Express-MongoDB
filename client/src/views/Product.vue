@@ -2,7 +2,8 @@
     <div v-if="product" class="inner">
         <div class="single">
             <div class="single__image">
-                <img :src="`/uploads/${product.photo || 'sneaker.jpg'}`" alt="sneaker photo" />
+                <!-- <img :src="`/uploads/${product.photo || 'sneaker.jpg'}`" alt="sneaker photo" /> -->
+                <img src="@/assets/images/sneaker.jpg" alt="sneaker photo" />
             </div>
             <div class="single__details">
                 <div class="single__name">
@@ -11,16 +12,24 @@
                 <div class="single__price">
                     <p>{{ product.price }} $</p>
                 </div>
-                <p class="choose__size">Choose size:</p>
+                <p v-if="selectedSize" class="choose__size">
+                    Choose size: {{ selectedSize.number || '' }}
+                </p>
+                <p v-else class="choose__size">Choose size:</p>
                 <div class="sizes">
                     <div
                         v-for="(size, index) in product.sizes"
-                        :key="size.name"
+                        :key="size.number"
                         @click="selectSize(index)"
                         class="sizes__size"
+                        :class="sizeClass(index)"
+                        :title="`Size: ${size.number}`"
                     >
                         <span>{{ size.number }}</span>
                     </div>
+                </div>
+                <div class="addToCart" @click="addToCart" ref="addBtn">
+                    Add to cart
                 </div>
             </div>
         </div>
@@ -35,12 +44,32 @@ export default {
         return {
             product: null,
             selectedSize: null,
+            selectedIndex: null,
         };
     },
     methods: {
         selectSize(index) {
             this.selectedSize = this.product.sizes[index];
-            console.log(this.selectedSize);
+            this.selectedIndex = index;
+        },
+        sizeClass(index) {
+            return {
+                'sizes__size--selected': this.selectedIndex === index,
+            };
+        },
+        toggleButton() {
+            this.$refs.addBtn.classList.toggle('added');
+            this.$refs.addBtn.textContent = 'Added to cart';
+            setTimeout(() => {
+                this.$refs.addBtn.classList.toggle('added');
+                this.$refs.addBtn.textContent = 'Add to cart';
+            }, 2000);
+        },
+        addToCart() {
+            if (this.selectedIndex === null) {
+                this.$refs.addBtn.textContent = 'Choose size';
+            }
+            this.toggleButton();
         },
     },
     async mounted() {

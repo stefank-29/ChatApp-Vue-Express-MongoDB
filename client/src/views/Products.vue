@@ -1,5 +1,6 @@
 <template>
     <div class="inner">
+        <a id="top"></a>
         <h1 class="title">Sneakers</h1>
 
         <div class="products">
@@ -26,6 +27,7 @@ export default {
             products: [],
         };
     },
+    methods: {},
     async created() {
         const response = await ProductsService.getProducts();
         this.products = response.data;
