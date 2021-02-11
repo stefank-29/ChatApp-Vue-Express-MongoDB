@@ -22,8 +22,8 @@
                         :key="size.number"
                         @click="selectSize(index)"
                         class="sizes__size"
-                        :class="sizeClass(index)"
-                        :title="`Size: ${size.number}`"
+                        :class="sizeClass(size, index)"
+                        :title="`${size.quantity > 0 ? `Size: ${size.number}` : `Out of stock`}`"
                     >
                         <span>{{ size.number }}</span>
                     </div>
@@ -49,25 +49,30 @@ export default {
     },
     methods: {
         selectSize(index) {
+            if (this.selectedSize === null) {
+                this.$refs.addBtn.textContent = 'Add to cart';
+            }
             this.selectedSize = this.product.sizes[index];
             this.selectedIndex = index;
         },
-        sizeClass(index) {
+        sizeClass(size, index) {
             return {
                 'sizes__size--selected': this.selectedIndex === index,
+                'sizes__size--out_of_stock': size.quantity === 0,
             };
         },
         toggleButton() {
-            this.$refs.addBtn.classList.toggle('added');
+            this.$refs.addBtn.classList.add('added');
             this.$refs.addBtn.textContent = 'Added to cart';
             setTimeout(() => {
-                this.$refs.addBtn.classList.toggle('added');
+                this.$refs.addBtn.classList.remove('added');
                 this.$refs.addBtn.textContent = 'Add to cart';
             }, 2000);
         },
         addToCart() {
-            if (this.selectedIndex === null) {
+            if (this.selectedSize === null) {
                 this.$refs.addBtn.textContent = 'Choose size';
+                return;
             }
             this.toggleButton();
         },

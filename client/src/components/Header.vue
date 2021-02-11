@@ -40,6 +40,11 @@
                             <img class="avatar" :src="$store.state.gravatar" alt="" />
                         </router-link>
                     </li>
+                    <li class="nav__item">
+                        <router-link to="/shoping-cart" class="nav__link">
+                            <img src="@/assets/images/shopping-cart.svg" alt="" />
+                        </router-link>
+                    </li>
                 </div>
             </nav>
         </header>
