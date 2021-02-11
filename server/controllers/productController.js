@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 const Size = mongoose.model('Size');
-
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
+const fs = require('fs');
 
 const multerOptions = {
     storage: multer.memoryStorage(),
@@ -29,7 +29,9 @@ exports.resize = async (req, res, next) => {
     req.body.photo = `${uuid.v4()}.${extension}`; // unique name
     const photo = await jimp.read(req.file.buffer);
     await photo.resize(800, jimp.AUTO);
-    await photo.write(`./public/uploads/${req.body.photo}`);
+    await photo.write(`./media/uploads/${req.body.photo}`);
+    // console.log(photo);
+    // fs.writeFileSync(`./public/uploads/${req.body.photo}`, photo);
     req.body.sizes = JSON.parse(req.body.sizes); // deserijalizacija
     next();
 };
@@ -55,7 +57,7 @@ exports.addProduct = async (req, res) => {
         price: req.body.price,
         gender: req.body.gender,
         sizes: sizes,
-        image: req.body.photo,
+        photo: req.body.photo,
     });
     await product.save();
     res.status(200).send();

@@ -6,7 +6,9 @@
             <input v-model="name" type="text" name="name" required />
             <label for="price">Price*</label>
             <input v-model="price" type="number" name="price" required />
-            <label for="gender">Gender</label>
+            <label for="photo">Photo*</label>
+            <input type="file" @change="onFileSelected" name="photo" />
+            <label for="gender">Gender*</label>
             <select @change="changeInputs($event)" v-model="gender" name="gender">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -18,7 +20,6 @@
                     <input type="number" v-model="sizes[index].quantity" />
                 </div>
             </div>
-            <input type="file" @change="onFileSelected" />
             <input type="submit" value="Add Product" name="add" class="button save" />
         </form>
     </div>

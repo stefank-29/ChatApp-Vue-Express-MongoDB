@@ -2,7 +2,7 @@
     <div v-if="product" class="inner">
         <div class="single">
             <div class="single__image">
-                <img src="@/assets/images/sneaker.jpg" alt="" />
+                <img :src="`/uploads/${product.photo || 'sneaker.jpg'}`" alt="sneaker photo" />
             </div>
             <div class="single__details">
                 <div class="single__name">
@@ -11,9 +11,14 @@
                 <div class="single__price">
                     <p>{{ product.price }} $</p>
                 </div>
+                <p class="choose__size">Choose size:</p>
                 <div class="sizes">
-                    <p>Choose size:</p>
-                    <div v-for="size in product.sizes" :key="size.name" class="sizes__size">
+                    <div
+                        v-for="(size, index) in product.sizes"
+                        :key="size.name"
+                        @click="selectSize(index)"
+                        class="sizes__size"
+                    >
                         <span>{{ size.number }}</span>
                     </div>
                 </div>
@@ -29,7 +34,14 @@ export default {
     data() {
         return {
             product: null,
+            selectedSize: null,
         };
+    },
+    methods: {
+        selectSize(index) {
+            this.selectedSize = this.product.sizes[index];
+            console.log(this.selectedSize);
+        },
     },
     async mounted() {
         try {

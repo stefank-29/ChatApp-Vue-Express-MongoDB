@@ -24,6 +24,7 @@ const app = express();
 //!globalni midlewareov
 // static files in public folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'media')));
 
 // get data from form submit and put it into req.body
 app.use(bodyParser.json());

@@ -1,8 +1,9 @@
 <template>
     <div>
         <div class="product__hero">
-            <img src="@/assets/images/sneaker.jpg" alt="sneaker image" />
-
+            <router-link :to="`/products/${product._id}`">
+                <img :src="`./uploads/${product.photo || 'sneaker.jpg'} `" alt="sneaker image" />
+            </router-link>
             <!-- :src="product.image !== '' ? product.image : '@/assets/images/sneaker.jpg'" -->
         </div>
         <div class="product__details">
@@ -12,7 +13,7 @@
                 </router-link>
             </div>
             <div class="product__price">
-                <span>{{ product.price }} RSD</span>
+                <span>{{ product.price }} $</span>
             </div>
         </div>
     </div>
