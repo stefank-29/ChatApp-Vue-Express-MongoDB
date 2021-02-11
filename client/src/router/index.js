@@ -7,6 +7,7 @@ import NotFound from '../views/NotFound.vue';
 import AddProduct from '../views/AddProduct.vue';
 import Products from '../views/Products.vue';
 import Product from '../views/Product.vue';
+import ShoppingCart from '../views/ShoppingCart.vue';
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [
         path: '/products/:id',
         name: 'Product',
         component: Product,
+    },
+    {
+        path: '/shopping-cart',
+        name: 'ShoppingCart',
+        component: ShoppingCart,
     },
 
     //* redirect

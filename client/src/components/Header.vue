@@ -41,7 +41,7 @@
                         </router-link>
                     </li>
                     <li class="nav__item">
-                        <router-link to="/shoping-cart" class="nav__link nav__link--cart">
+                        <router-link to="/shopping-cart" class="nav__link nav__link--cart">
                             <div class="cart">
                                 <img src="@/assets/images/shopping-cart.svg" alt="" />
                                 <div class="items__num">{{ cartItemsNum() }}</div>
