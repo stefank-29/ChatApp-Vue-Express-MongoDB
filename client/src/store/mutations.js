@@ -10,4 +10,7 @@ export default {
         state.gravatar = '';
         state.isUserLoggedIn = false;
     },
+    addToCart(state, item) {
+        state.cartItems.push(item);
+    },
 };

@@ -41,8 +41,11 @@
                         </router-link>
                     </li>
                     <li class="nav__item">
-                        <router-link to="/shoping-cart" class="nav__link">
-                            <img src="@/assets/images/shopping-cart.svg" alt="" />
+                        <router-link to="/shoping-cart" class="nav__link nav__link--cart">
+                            <div class="cart">
+                                <img src="@/assets/images/shopping-cart.svg" alt="" />
+                                <div class="items__num">{{ cartItemsNum() }}</div>
+                            </div>
                         </router-link>
                     </li>
                 </div>
@@ -52,11 +55,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'Header',
     methods: {
         ...mapActions(['removeUser']),
+        ...mapGetters(['cartItemsNum']),
         async logout() {
             this.removeUser();
             this.$router.push({ name: 'Home' });

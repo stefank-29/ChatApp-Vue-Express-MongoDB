@@ -13,4 +13,7 @@ export default {
         }
         commit('logout');
     },
+    addProductToCart({ commit }, item) {
+        commit('addToCart', item);
+    },
 };

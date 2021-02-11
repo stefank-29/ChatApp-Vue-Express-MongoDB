@@ -68,6 +68,31 @@
                 background: none;
             }
         }
+        .cart {
+            position: relative;
+            img {
+                height: auto;
+                width: 45px;
+                margin: 0;
+            }
+            .items__num {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 2rem;
+                height: 2rem;
+                position: absolute;
+                top: -0.4rem;
+                right: -0.8rem;
+                padding: 1.3rem 1.4rem 1.3rem 1.3rem;
+                border-radius: 50%;
+                color: white;
+                background-color: #bb2457;
+                font-size: 1.5rem;
+                font-family: 'Lato', sans-serif;
+                font-weight: 700;
+            }
+        }
     }
 }
 .router-link-exact-active {

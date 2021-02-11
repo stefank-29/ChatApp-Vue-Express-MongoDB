@@ -20,7 +20,7 @@
                     <div
                         v-for="(size, index) in product.sizes"
                         :key="size.number"
-                        @click="selectSize(index)"
+                        @click="selectSize(size, index)"
                         class="sizes__size"
                         :class="sizeClass(size, index)"
                         :title="`${size.quantity > 0 ? `Size: ${size.number}` : `Out of stock`}`"
@@ -38,6 +38,7 @@
 
 <script>
 import ProductsService from '@/services/ProductsService';
+import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'Product',
     data() {
@@ -48,7 +49,13 @@ export default {
         };
     },
     methods: {
-        selectSize(index) {
+        ...mapActions(['addProductToCart']),
+        ...mapGetters(['cartItemsNum']),
+        selectSize(size, index) {
+            if (size.quantity === 0) {
+                // out of stock
+                return;
+            }
             if (this.selectedSize === null) {
                 this.$refs.addBtn.textContent = 'Add to cart';
             }
@@ -74,6 +81,8 @@ export default {
                 this.$refs.addBtn.textContent = 'Choose size';
                 return;
             }
+            const payload = { product: this.product, size: { ...this.selectedSize } };
+            this.addProductToCart(payload);
             this.toggleButton();
         },
     },
