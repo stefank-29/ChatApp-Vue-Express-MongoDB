@@ -39,7 +39,8 @@
             <div v-if="items.length !== 0" class="title">
                 Shipping Address
             </div>
-            <AddressForm :userInfo="user" />
+            <AddressForm v-if="items.length !== 0 && user" :userInfo="user" />
+            <!-- mora uslov && user da bi se popunila forma na refresh -->
         </div>
         <Modal v-show="isModalVisible" @close="closeModal" :itemIndex="itemToRemove" />
     </div>

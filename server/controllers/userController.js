@@ -49,9 +49,6 @@ exports.register = async (req, res, next) => {
         streetNumber: req.body.streetNumber,
     });
     const register = promisify(User.register, User);
-    console.log(req.body);
-
     await register(user, req.body.password);
-    console.log('cccc');
     next();
 };

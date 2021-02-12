@@ -36,7 +36,7 @@ export default {
             const response = await AuthenticationService.isLoggedIn();
             if (response.data.user) {
                 const payload = { user: response.data.user, gravatar: response.data.gravatar };
-                this.setUser(payload);
+                await this.setUser(payload);
             } else {
                 console.log('No logged user');
             }

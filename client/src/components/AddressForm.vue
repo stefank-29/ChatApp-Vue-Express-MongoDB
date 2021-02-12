@@ -53,13 +53,30 @@ export default {
             street_number: '',
         };
     },
-    created() {
+    mounted() {
         if (this.userInfo !== null) {
             this.name = this.userInfo.name;
             this.surname = this.userInfo.surname;
             this.email = this.userInfo.email;
+            this.phone = this.userInfo.phone;
+            this.city = this.userInfo.city;
+            this.zip = this.userInfo.zip;
+            this.street = this.userInfo.street;
+            this.street_number = this.userInfo.streetNumber;
         }
     },
+    // computed:{
+    //     if (this.userInfo !== null) {
+    //         this.name = this.userInfo.name;
+    //         this.surname = this.userInfo.surname;
+    //         this.email = this.userInfo.email;
+    //         this.phone = this.userInfo.phone;
+    //         this.city = this.userInfo.city;
+    //         this.zip = this.userInfo.zip;
+    //         this.street = this.userInfo.street;
+    //         this.street_number = this.userInfo.streetNumber;
+    //     }
+    // },
 };
 </script>
 
