@@ -39,7 +39,7 @@
             <div v-if="items.length !== 0" class="title">
                 Shipping Address
             </div>
-            <AddressForm />
+            <AddressForm :userInfo="user" />
         </div>
         <Modal v-show="isModalVisible" @close="closeModal" :itemIndex="itemToRemove" />
     </div>
@@ -49,7 +49,7 @@
 import Modal from '@/components/Modal';
 import AddressForm from '@/components/AddressForm';
 
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 export default {
     name: 'ShoppingCart',
     components: {
@@ -63,13 +63,17 @@ export default {
             itemToRemove: null,
         };
     },
+    computed: {
+        ...mapState(['user']),
+    },
     methods: {
         ...mapGetters(['cartTotalPrice']),
         showModal(index) {
             this.itemToRemove = index;
             this.isModalVisible = true;
             //todo header za tabelu
-            //todo sesija
+            //todo admin
+            //todo podaci user
             //todo slanje porudbine (popunjavanje podataka) + dugme za slanje => cuvati u bazi
             //todo smanjivanje kolicine kad se potvrdi porudzbina
         },

@@ -3,7 +3,13 @@ const User = mongoose.model('User');
 const promisify = require('es6-promisify');
 
 exports.validateRegister = async (req, res, next) => {
-    req.checkBody('username', 'You must enter a name').notEmpty();
+    req.checkBody('name', 'You must enter a name').notEmpty();
+    req.checkBody('surname', 'You must enter a surname').notEmpty();
+    req.checkBody('phone', 'You must enter a phone number').notEmpty();
+    req.checkBody('city', 'You must enter a city name').notEmpty();
+    req.checkBody('zip', 'You must enter a zip code').notEmpty();
+    req.checkBody('street', 'You must enter a street name').notEmpty();
+    req.checkBody('streetNumber', 'You must enter a street number').notEmpty();
     req.checkBody('email', 'Email is not valid!').isEmail();
     req.sanitizeBody('email').normalizeEmail({
         remove_dots: false,
@@ -20,11 +26,6 @@ exports.validateRegister = async (req, res, next) => {
         res.send({ errors, error: true }); // saljem greske
         return;
     }
-    let user = await User.findOne({ username: req.body.username });
-    if (user) {
-        res.send({ error: 'User with that username already exists' });
-        return;
-    }
 
     user = await User.findOne({ email: req.body.email });
     if (user) {
@@ -32,18 +33,25 @@ exports.validateRegister = async (req, res, next) => {
 
         return;
     }
-
     next();
 };
 
 exports.register = async (req, res, next) => {
+    console.log('aaaaa');
     const user = await new User({
-        username: req.body.username,
         email: req.body.email,
         name: req.body.name,
         surname: req.body.surname,
+        phone: req.body.phone,
+        city: req.body.city,
+        zip: req.body.zip,
+        street: req.body.street,
+        streetNumber: req.body.streetNumber,
     });
     const register = promisify(User.register, User);
+    console.log(req.body);
+
     await register(user, req.body.password);
+    console.log('cccc');
     next();
 };

@@ -2,8 +2,8 @@
     <div class="inner">
         <form @submit.prevent="login" class="form card">
             <h2>Login</h2>
-            <label for="username">Username*</label>
-            <input v-model="username" type="text" name="username" required />
+            <label for="email">Email*</label>
+            <input v-model="email" type="text" name="email" required />
             <label for="password">Password*</label>
             <input v-model="password" type="password" name="password" required />
             <input type="submit" value="Log In" name="login" class="button save" />
@@ -18,7 +18,7 @@ export default {
     name: 'Login',
     data() {
         return {
-            username: '',
+            email: '',
             password: '',
             error: null,
         };
@@ -28,7 +28,7 @@ export default {
         async login() {
             try {
                 const response = await AuthenticationService.login({
-                    username: this.username,
+                    email: this.email,
                     password: this.password,
                 });
                 if (!response.data.error) {

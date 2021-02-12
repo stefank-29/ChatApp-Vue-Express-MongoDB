@@ -7,8 +7,8 @@ const productController = require('../controllers/productController');
 
 router.post(
     '/register',
-    userController.validateRegister,
-    userController.register,
+    catchErrors(userController.validateRegister),
+    catchErrors(userController.register),
     authController.login,
     authController.sendUser
 );
@@ -20,14 +20,14 @@ router.get('/user', authController.isUserLoggedIn);
 
 // Products
 
-router.get('/products', productController.getProducts);
+router.get('/products', catchErrors(productController.getProducts));
 router.post(
     '/products',
     productController.upload,
     productController.resize,
-    productController.addProduct
+    catchErrors(productController.addProduct)
 );
 
-router.get('/products/:id', productController.getSingleProduct);
+router.get('/products/:id', catchErrors(productController.getSingleProduct));
 
 module.exports = router;

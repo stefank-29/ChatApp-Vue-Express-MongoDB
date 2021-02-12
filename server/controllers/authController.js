@@ -20,11 +20,3 @@ exports.isUserLoggedIn = (req, res) => {
         res.send(null);
     }
 };
-
-// exports.isLoggedIn = (req, res, next) => {
-//     // from passport
-//     if (req.isAuthenticated()) {
-//         return next();
-//     }
-//     //res.redirect('/login');
-// };
