@@ -12,8 +12,10 @@ export default {
     },
     addToCart(state, item) {
         state.cartItems.push(item);
+        localStorage.setItem('items', JSON.stringify(state.cartItems));
     },
     removeFromCart(state, itemIdx) {
         state.cartItems.splice(itemIdx, 1);
+        localStorage.setItem('items', JSON.stringify(state.cartItems));
     },
 };

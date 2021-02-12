@@ -40,6 +40,8 @@ export default {
             } else {
                 console.log('No logged user');
             }
+            console.log(JSON.parse(localStorage.getItem('items')));
+            this.$store.state.cartItems = [...JSON.parse(localStorage.getItem('items'))];
         } catch (error) {
             console.log(error.message);
         }

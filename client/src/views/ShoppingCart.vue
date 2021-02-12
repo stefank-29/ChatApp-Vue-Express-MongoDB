@@ -36,6 +36,10 @@
                 <span>Total:</span>
                 <span class="total__price">{{ cartTotalPrice() }} $</span>
             </div>
+            <div v-if="items.length !== 0" class="title">
+                Shipping Address
+            </div>
+            <AddressForm />
         </div>
         <Modal v-show="isModalVisible" @close="closeModal" :itemIndex="itemToRemove" />
     </div>
@@ -43,11 +47,14 @@
 
 <script>
 import Modal from '@/components/Modal';
+import AddressForm from '@/components/AddressForm';
+
 import { mapGetters } from 'vuex';
 export default {
     name: 'ShoppingCart',
     components: {
         Modal,
+        AddressForm,
     },
     data() {
         return {
@@ -74,6 +81,10 @@ export default {
         },
     },
     created() {
+        this.$store.state.cartItems = [...JSON.parse(localStorage.getItem('items'))];
+        this.items = this.$store.state.cartItems;
+    },
+    mounted() {
         this.items = this.$store.state.cartItems;
     },
 };
