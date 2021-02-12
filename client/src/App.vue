@@ -11,6 +11,10 @@
 </template>
 
 <script>
+//todo header za tabelu
+//todo admin rute blokiranje
+//todo slanje porudbine (popunjavanje podataka) + dugme za slanje => cuvati u bazi
+//todo smanjivanje kolicine kad se potvrdi porudzbina
 import Header from '@/components/Header';
 import AuthenticationService from '@/services/AuthenticationService';
 import { mapActions } from 'vuex';
@@ -40,7 +44,6 @@ export default {
             } else {
                 console.log('No logged user');
             }
-            console.log(JSON.parse(localStorage.getItem('items')));
             this.$store.state.cartItems = [...JSON.parse(localStorage.getItem('items'))];
         } catch (error) {
             console.log(error.message);

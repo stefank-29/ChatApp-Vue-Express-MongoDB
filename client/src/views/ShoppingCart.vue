@@ -39,7 +39,7 @@
             <div v-if="items.length !== 0" class="title">
                 Shipping Address
             </div>
-            <AddressForm v-if="items.length !== 0 && user" :userInfo="user" />
+            <AddressForm :key="componentKey" v-if="items.length !== 0" :userInfo="user" />
             <!-- mora uslov && user da bi se popunila forma na refresh -->
         </div>
         <Modal v-show="isModalVisible" @close="closeModal" :itemIndex="itemToRemove" />
@@ -62,6 +62,7 @@ export default {
             items: [],
             isModalVisible: false,
             itemToRemove: null,
+            componentKey: 0,
         };
     },
     computed: {
@@ -72,11 +73,6 @@ export default {
         showModal(index) {
             this.itemToRemove = index;
             this.isModalVisible = true;
-            //todo header za tabelu
-            //todo admin
-            //todo podaci user
-            //todo slanje porudbine (popunjavanje podataka) + dugme za slanje => cuvati u bazi
-            //todo smanjivanje kolicine kad se potvrdi porudzbina
         },
         closeModal() {
             this.isModalVisible = false;
@@ -86,8 +82,12 @@ export default {
         },
     },
     created() {
-        this.$store.state.cartItems = [...JSON.parse(localStorage.getItem('items'))];
+        this.$store.state.cartItems = [...JSON.parse(localStorage.getItem('items'))]; // izvucem iz storega u state
         this.items = this.$store.state.cartItems;
+        // forica za formu da se izrenderuje posle pola sekunde
+        setTimeout(() => {
+            this.componentKey += 1;
+        }, 500);
     },
     mounted() {
         this.items = this.$store.state.cartItems;

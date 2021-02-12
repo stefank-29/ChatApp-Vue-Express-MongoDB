@@ -63,10 +63,20 @@ export default {
             this.zip = this.userInfo.zip;
             this.street = this.userInfo.street;
             this.street_number = this.userInfo.streetNumber;
+            // setTimeout(() => {
+            //     this.name = this.userInfo.name;
+            //     this.surname = this.userInfo.surname;
+            //     this.email = this.userInfo.email;
+            //     this.phone = this.userInfo.phone;
+            //     this.city = this.userInfo.city;
+            //     this.zip = this.userInfo.zip;
+            //     this.street = this.userInfo.street;
+            //     this.street_number = this.userInfo.streetNumber;
+            // }, 3000);
         }
     },
-    // computed:{
-    //     if (this.userInfo !== null) {
+    // computed: {
+    //     fillForm() {
     //         this.name = this.userInfo.name;
     //         this.surname = this.userInfo.surname;
     //         this.email = this.userInfo.email;
@@ -75,7 +85,7 @@ export default {
     //         this.zip = this.userInfo.zip;
     //         this.street = this.userInfo.street;
     //         this.street_number = this.userInfo.streetNumber;
-    //     }
+    //     },
     // },
 };
 </script>

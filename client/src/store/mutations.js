@@ -4,11 +4,13 @@ export default {
         state.user = user;
         state.isUserLoggedIn = true;
         state.gravatar = gravatar;
+        state.isAdmin = user.isAdmin;
     },
     logout(state) {
         state.user = null;
         state.gravatar = '';
         state.isUserLoggedIn = false;
+        state.isAdmin = false;
     },
     addToCart(state, item) {
         state.cartItems.push(item);
