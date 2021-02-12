@@ -13,4 +13,7 @@ export default {
     addToCart(state, item) {
         state.cartItems.push(item);
     },
+    removeFromCart(state, itemIdx) {
+        state.cartItems.splice(itemIdx, 1);
+    },
 };

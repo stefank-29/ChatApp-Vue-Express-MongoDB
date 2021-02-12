@@ -14,6 +14,12 @@ export default {
         commit('logout');
     },
     addProductToCart({ commit }, item) {
+        //todo sacuvati u sesiji
         commit('addToCart', item);
+    },
+    removeProductFromCart({ commit }, itemIdx) {
+        //todo sacuvati u sesiji
+        console.log(itemIdx);
+        commit('removeFromCart', itemIdx);
     },
 };

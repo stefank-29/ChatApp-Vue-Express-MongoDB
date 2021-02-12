@@ -2,7 +2,7 @@
     <div class="inner">
         <div class="shopping_cart">
             <div class="title">Your cart</div>
-            <div v-for="item in items" :key="item._id" class="cart_item">
+            <div v-for="(item, index) in items" :key="item.product._id" class="cart_item">
                 <div class="cart_item__img">
                     <!-- <img
                         :src="`/uploads/${item.product.photo || 'sneaker.jpg'}`"
@@ -24,11 +24,11 @@
                     <div>{{ item.product.price }} $</div>
                 </div>
                 <div class="cart_item__remove">
-                    <div @click="showModal" class="removeBtn">Remove</div>
+                    <div @click="showModal(index)" class="removeBtn">Remove</div>
                 </div>
             </div>
         </div>
-        <Modal v-show="isModalVisible" @close="closeModal" />
+        <Modal v-show="isModalVisible" @close="closeModal" :itemIndex="itemToRemove" />
     </div>
 </template>
 
@@ -43,13 +43,15 @@ export default {
         return {
             items: [],
             isModalVisible: false,
+            itemToRemove: null,
         };
     },
     methods: {
-        showModal() {
+        showModal(index) {
+            this.itemToRemove = index;
             this.isModalVisible = true;
-            //todo proslediti item koji se brise na confirm
             //todo ukupna cena
+            //todo ako je prazna korpa
         },
         closeModal() {
             this.isModalVisible = false;
