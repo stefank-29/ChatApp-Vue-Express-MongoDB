@@ -2,6 +2,11 @@
     <div class="inner">
         <div class="shopping_cart">
             <div class="title">Your cart</div>
+            <div v-if="items.length === 0" class="emptyCart">
+                <span>Your cart is empty!</span>
+            </div>
+            <div v-if="items.length === 0" @click="backToShop" class="backToShop">Back to shop</div>
+
             <div v-for="(item, index) in items" :key="item.product._id" class="cart_item">
                 <div class="cart_item__img">
                     <!-- <img
@@ -27,6 +32,10 @@
                     <div @click="showModal(index)" class="removeBtn">Remove</div>
                 </div>
             </div>
+            <div v-if="items.length !== 0" class="total">
+                <span>Total:</span>
+                <span class="total__price">{{ cartTotalPrice() }} $</span>
+            </div>
         </div>
         <Modal v-show="isModalVisible" @close="closeModal" :itemIndex="itemToRemove" />
     </div>
@@ -34,6 +43,7 @@
 
 <script>
 import Modal from '@/components/Modal';
+import { mapGetters } from 'vuex';
 export default {
     name: 'ShoppingCart',
     components: {
@@ -47,14 +57,20 @@ export default {
         };
     },
     methods: {
+        ...mapGetters(['cartTotalPrice']),
         showModal(index) {
             this.itemToRemove = index;
             this.isModalVisible = true;
-            //todo ukupna cena
-            //todo ako je prazna korpa
+            //todo header za tabelu
+            //todo sesija
+            //todo slanje porudbine (popunjavanje podataka) + dugme za slanje => cuvati u bazi
+            //todo smanjivanje kolicine kad se potvrdi porudzbina
         },
         closeModal() {
             this.isModalVisible = false;
+        },
+        backToShop() {
+            this.$router.push({ name: 'Products' });
         },
     },
     created() {
