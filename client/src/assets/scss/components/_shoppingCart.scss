@@ -5,7 +5,7 @@
     align-items: flex-start;
     margin: 3rem auto;
     padding-bottom: 3rem;
-    background-color: rgba($color: #ffffff, $alpha: 0.9);
+    background-color: rgba($color: #ffffff, $alpha: 0.93);
     min-height: 70rem;
     // border-radius: 10px;
     box-shadow: 0 0 10px rgba($color: rgb(0, 0, 0), $alpha: 0.2),
@@ -30,6 +30,40 @@
     margin: 1rem auto;
     border: 1px solid rgba($color: #000000, $alpha: 0.1);
     &__img {
-        width: 30rem;
+        width: 16rem;
+    }
+    &__details {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 40rem;
+        height: 15rem;
+        font-size: 2rem;
+        padding: 1rem 3rem;
+    }
+    &__price,
+    &__remove {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 15rem;
+        height: 15rem;
+        font-size: 2rem;
+        padding: 0 2rem;
+        .removeBtn {
+            font-size: 1.7rem;
+            font-family: 'Avenir', sans-serif;
+            border: 1px solid rgba($color: #000000, $alpha: 0.4);
+            background-color: rgba($color: $lightblue, $alpha: 0.3);
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            &:hover {
+                color: white;
+                background-color: rgba($color: $blue, $alpha: 0.8);
+            }
+        }
     }
 }
