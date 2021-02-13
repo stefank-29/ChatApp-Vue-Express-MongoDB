@@ -4,6 +4,7 @@ const { catchErrors } = require('../handlers/errorHandlers');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const productController = require('../controllers/productController');
+const orderController = require('../controllers/orderController');
 
 router.post(
     '/register',
@@ -31,5 +32,7 @@ router.post(
 );
 
 router.get('/products/:id', catchErrors(productController.getSingleProduct));
+
+router.post('/orders', catchErrors(orderController.addOrder));
 
 module.exports = router;

@@ -56,6 +56,7 @@ export default {
                 // out of stock
                 return;
             }
+            // ako je 'Choose size' na buttonu
             if (this.selectedSize === null) {
                 this.$refs.addBtn.textContent = 'Add to cart';
             }

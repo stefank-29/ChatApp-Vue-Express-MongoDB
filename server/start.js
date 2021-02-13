@@ -18,6 +18,7 @@ mongoose.connection.on('error', (err) => {
 require('./models/User');
 require('./models/Size');
 require('./models/Product');
+require('./models/Order');
 
 // run server
 const app = require('./app');

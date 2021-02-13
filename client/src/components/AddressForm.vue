@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="confirm" class="card form__cart">
+    <form @submit.prevent="confirmOrder" class="card form__cart">
         <div class="form__block">
             <label for="name">Name</label>
             <input v-model="name" type="text" name="name" required />
@@ -32,14 +32,19 @@
             <label for="text">Street number:</label>
             <input v-model="street_number" type="text" name="street_number" required />
         </div>
+        <input type="submit" value="Confirm" class="confirm_order" ref="addBtn" />
     </form>
 </template>
 
 <script>
+import OrderService from '@/services/OrderService';
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'AddressForm',
     props: {
         userInfo: Object,
+        items: Array,
     },
     data() {
         return {
@@ -51,7 +56,34 @@ export default {
             zip: '',
             street: '',
             street_number: '',
+            total: '',
         };
+    },
+    methods: {
+        ...mapGetters(['cartTotalPrice']),
+        async confirmOrder() {
+            //todo mozda popup prvo
+            //todo obrisati sve iz korpe
+            //todo poslati zahtev api-u
+            //todo u bazi smanjiti kolicinu za brojeve
+            this.total = this.cartTotalPrice();
+            try {
+                const response = await OrderService.sendOrder({
+                    items: this.items,
+                    name: this.name,
+                    surname: this.surname,
+                    email: this.email,
+                    phone: this.phone,
+                    city: this.city,
+                    zip: this.zip,
+                    street: this.street,
+                    streetNumber: this.street_number,
+                    total: this.total,
+                });
+            } catch (error) {
+                console.log(error.message);
+            }
+        },
     },
     mounted() {
         if (this.userInfo !== null) {
@@ -63,16 +95,6 @@ export default {
             this.zip = this.userInfo.zip;
             this.street = this.userInfo.street;
             this.street_number = this.userInfo.streetNumber;
-            // setTimeout(() => {
-            //     this.name = this.userInfo.name;
-            //     this.surname = this.userInfo.surname;
-            //     this.email = this.userInfo.email;
-            //     this.phone = this.userInfo.phone;
-            //     this.city = this.userInfo.city;
-            //     this.zip = this.userInfo.zip;
-            //     this.street = this.userInfo.street;
-            //     this.street_number = this.userInfo.streetNumber;
-            // }, 3000);
         }
     },
 };

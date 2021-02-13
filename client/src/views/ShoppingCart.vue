@@ -55,7 +55,12 @@
             <div v-if="items.length !== 0" class="title">
                 Shipping Address
             </div>
-            <AddressForm :key="componentKey" v-if="items.length !== 0" :userInfo="user" />
+            <AddressForm
+                :key="componentKey"
+                v-if="items.length !== 0"
+                :userInfo="user"
+                :items="items"
+            />
         </div>
         <Modal v-show="isModalVisible" @close="closeModal" :itemIndex="itemToRemove" />
     </div>
