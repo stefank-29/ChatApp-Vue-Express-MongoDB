@@ -76,7 +76,9 @@ export default {
                     streetNumber: this.street_number,
                 });
                 if (!response.data.error) {
-                    console.log('updateovan');
+                    // redirekt na home i postaviti da je user ulogovan
+                    const payload = { user: response.data.user, gravatar: response.data.gravatar };
+                    this.setUser(payload);
                 } else {
                 }
             } catch (error) {

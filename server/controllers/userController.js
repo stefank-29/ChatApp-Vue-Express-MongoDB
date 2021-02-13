@@ -70,5 +70,5 @@ exports.updateAccount = async (req, res) => {
         { new: true, runValidators: true, context: 'query' }
     );
 
-    res.send({ user: user, error: false });
+    res.send({ user: user, error: false, gravatar: user.gravatar });
 };

@@ -11,10 +11,8 @@
 </template>
 
 <script>
-//todo blokiranje ruta za admina i ako nije loginovan
 //todo dugme za slanje => cuvati u bazi
 //todo smanjivanje kolicine kad se potvrdi porudzbina
-//todo update accounta
 //todo admin da update-uje i brise tike
 import Header from '@/components/Header';
 import AuthenticationService from '@/services/AuthenticationService';
