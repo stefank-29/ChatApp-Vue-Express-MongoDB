@@ -37,7 +37,6 @@ exports.validateRegister = async (req, res, next) => {
 };
 
 exports.register = async (req, res, next) => {
-    console.log('aaaaa');
     const user = await new User({
         email: req.body.email,
         name: req.body.name,
@@ -51,4 +50,25 @@ exports.register = async (req, res, next) => {
     const register = promisify(User.register, User);
     await register(user, req.body.password);
     next();
+};
+
+exports.updateAccount = async (req, res) => {
+    const updates = {
+        email: req.body.email,
+        name: req.body.name,
+        surname: req.body.surname,
+        phone: req.body.phone,
+        city: req.body.city,
+        zip: req.body.zip,
+        street: req.body.street,
+        streetNumber: req.body.streetNumber,
+    };
+    // (query, update, options)
+    const user = await User.findOneAndUpdate(
+        { _id: req.body.id }, // query (id uvek mogu da vidim)
+        { $set: updates }, // update
+        { new: true, runValidators: true, context: 'query' }
+    );
+
+    res.send({ user: user, error: false });
 };

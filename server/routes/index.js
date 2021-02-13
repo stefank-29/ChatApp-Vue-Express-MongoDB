@@ -13,6 +13,8 @@ router.post(
     authController.sendUser
 );
 
+router.post('/account', catchErrors(userController.updateAccount));
+
 router.post('/login', authController.login, authController.sendUser);
 router.get('/logout', authController.logout);
 

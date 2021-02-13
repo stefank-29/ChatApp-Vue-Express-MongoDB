@@ -13,4 +13,7 @@ export default {
     logout() {
         return Api().get('/logout');
     },
+    update(credentials) {
+        return Api().post('/account', credentials);
+    },
 };

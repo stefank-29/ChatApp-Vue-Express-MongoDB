@@ -8,6 +8,7 @@ import AddProduct from '../views/AddProduct.vue';
 import Products from '../views/Products.vue';
 import Product from '../views/Product.vue';
 import ShoppingCart from '../views/ShoppingCart.vue';
+import Account from '../views/Account.vue';
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,7 @@ const routes = [
     {
         path: '/addproduct',
         name: 'Add Product',
+        beforeEnter: checkAdminRights,
         component: AddProduct,
     },
     {
@@ -47,6 +49,12 @@ const routes = [
         name: 'ShoppingCart',
         component: ShoppingCart,
     },
+    {
+        path: '/account',
+        name: 'Account',
+        beforeEnter: checkIfAuthenticated,
+        component: Account,
+    },
 
     //* redirect
     // {
@@ -60,11 +68,34 @@ const routes = [
         component: NotFound,
     },
 ];
+import store from '../store/index';
+
+function checkAdminRights(to, from, next) {
+    // check if the user is admin
+    if (store.state.isAdmin) {
+        next();
+    } else {
+        next({ path: '/' });
+    }
+}
+
+function checkIfAuthenticated(to, from, next) {
+    if (store.state.isUserLoggedIn) {
+        next();
+    } else {
+        next({ path: '/login' });
+    }
+}
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes,
 });
+
+// router.beforeEach((to, from, next) => {
+//     if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' });
+//     else next();
+// });
 
 export default router;

@@ -7,6 +7,22 @@
             </div>
             <div v-if="items.length === 0" @click="backToShop" class="backToShop">Back to shop</div>
 
+            <div v-if="items.length !== 0" class="cart_item cart_item__header">
+                <div class="cart_item__img"></div>
+                <div class="cart_item__details">
+                    <div>Item</div>
+                </div>
+                <div class="cart_item__price cart_item__pricee">
+                    <div>Price</div>
+                </div>
+                <div class="cart_item__price">
+                    <div>Discount</div>
+                </div>
+                <div class="cart_item__price cart_item__discount">
+                    <div>Discounted price</div>
+                </div>
+            </div>
+
             <div v-for="(item, index) in items" :key="item.product._id" class="cart_item">
                 <div class="cart_item__img">
                     <!-- <img
@@ -40,7 +56,6 @@
                 Shipping Address
             </div>
             <AddressForm :key="componentKey" v-if="items.length !== 0" :userInfo="user" />
-            <!-- mora uslov && user da bi se popunila forma na refresh -->
         </div>
         <Modal v-show="isModalVisible" @close="closeModal" :itemIndex="itemToRemove" />
     </div>
