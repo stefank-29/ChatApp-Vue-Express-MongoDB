@@ -33,6 +33,6 @@ router.post(
 
 router.get('/products/:id', catchErrors(productController.getSingleProduct));
 
-router.post('/orders', catchErrors(orderController.addOrder));
+router.post('/orders', orderController.downgradeSizes, orderController.addOrder);
 
 module.exports = router;

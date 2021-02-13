@@ -62,13 +62,10 @@ export default {
     methods: {
         ...mapGetters(['cartTotalPrice']),
         async confirmOrder() {
-            //todo mozda popup prvo
-            //todo obrisati sve iz korpe
-            //todo poslati zahtev api-u
-            //todo u bazi smanjiti kolicinu za brojeve
+            let response;
             this.total = this.cartTotalPrice();
             try {
-                const response = await OrderService.sendOrder({
+                response = await OrderService.sendOrder({
                     items: this.items,
                     name: this.name,
                     surname: this.surname,
@@ -80,6 +77,12 @@ export default {
                     streetNumber: this.street_number,
                     total: this.total,
                 });
+                if (response.status === 200) {
+                    console.log('usao');
+                    this.$store.state.cartItems = [];
+                    localStorage.setItem('items', JSON.stringify([]));
+                    this.$router.push({ name: 'Products' });
+                }
             } catch (error) {
                 console.log(error.message);
             }

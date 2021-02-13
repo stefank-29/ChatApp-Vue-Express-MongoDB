@@ -11,8 +11,6 @@
 </template>
 
 <script>
-//todo dugme za slanje => cuvati u bazi
-//todo smanjivanje kolicine kad se potvrdi porudzbina
 //todo admin da update-uje i brise tike
 import Header from '@/components/Header';
 import AuthenticationService from '@/services/AuthenticationService';

@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div v-for="(item, index) in items" :key="item.product._id" class="cart_item">
+            <div v-for="(item, index) in items" :key="index" class="cart_item">
                 <div class="cart_item__img">
                     <!-- <img
                         :src="`/uploads/${item.product.photo || 'sneaker.jpg'}`"

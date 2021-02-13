@@ -5,14 +5,16 @@ const validator = require('validator');
 
 const orderSchema = new Schema({
     items: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Product',
-        },
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Size',
-        },
+        [
+            {
+                type: mongoose.Schema.ObjectId,
+                ref: 'Product',
+            },
+            {
+                type: mongoose.Schema.ObjectId,
+                ref: 'Size',
+            },
+        ],
     ],
     total: {
         type: Number,
