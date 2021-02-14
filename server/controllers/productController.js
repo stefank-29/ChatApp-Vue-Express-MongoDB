@@ -32,11 +32,12 @@ exports.resize = async (req, res, next) => {
     await photo.write(`./media/uploads/${req.body.photo}`);
     // console.log(photo);
     // fs.writeFileSync(`./public/uploads/${req.body.photo}`, photo);
-    req.body.sizes = JSON.parse(req.body.sizes); // deserijalizacija
     next();
 };
 
 exports.addProduct = async (req, res) => {
+    req.body.sizes = JSON.parse(req.body.sizes); // deserijalizacija
+
     const sizes = [];
     let n = 0;
     if (req.body.gender === 'male' || req.body.gender === 'female') {
@@ -107,4 +108,9 @@ exports.getSingleProduct = async (req, res) => {
     const id = req.params.id;
     const product = await Product.find({ _id: id }).populate('sizes');
     res.send({ product: product });
+};
+
+exports.deleteProduct = async (req, res) => {
+    await Product.findOneAndDelete({ _id: req.params.id });
+    res.status(200).send();
 };

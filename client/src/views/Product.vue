@@ -2,8 +2,8 @@
     <div v-if="product" class="inner">
         <div class="single">
             <div class="single__image">
-                <!-- <img :src="`/uploads/${product.photo || 'sneaker.jpg'}`" alt="sneaker photo" /> -->
-                <img src="@/assets/images/sneaker.jpg" alt="sneaker photo" />
+                <img :src="`/uploads/${product.photo || 'sneaker.jpg'}`" alt="sneaker photo" />
+                <!-- <img src="@/assets/images/sneaker.jpg" alt="sneaker photo" /> -->
             </div>
             <div class="single__details">
                 <div class="single__name">

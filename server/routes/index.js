@@ -39,6 +39,8 @@ router.post(
 );
 
 router.get('/products/:id', catchErrors(productController.getSingleProduct));
+
+router.delete('/products/:id', catchErrors(productController.deleteProduct));
 // router.get('/products/:id/update', catchErrors(productController.getSingleProduct));
 
 router.post('/orders', orderController.downgradeSizes, orderController.addOrder);

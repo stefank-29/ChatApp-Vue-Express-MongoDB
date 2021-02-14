@@ -8,8 +8,12 @@
             <input v-model="price" type="number" name="price" required />
             <label for="photo">Photo*</label>
             <input type="file" @change="onFileSelected" name="photo" />
-            <img class="form_photo" src="@/assets/images/sneaker.jpg" alt="sneaker photo" />
-            <!-- <img :src="`./uploads/${product.photo || 'sneaker.jpg'} `" alt="sneaker image" /> -->
+            <!-- <img class="form_photo" src="@/assets/images/sneaker.jpg" alt="sneaker photo" /> -->
+            <img
+                class="form_photo"
+                :src="`/uploads/${product.photo || 'sneaker.jpg'} `"
+                alt="sneaker image"
+            />
 
             <label for="gender">Gender*</label>
             <select @change="changeInputs($event)" v-model="gender" name="gender">
@@ -23,7 +27,10 @@
                     <input type="number" v-model="sizes[index].quantity" />
                 </div>
             </div>
-            <input type="submit" value="Edit Product" name="add" class="button save" />
+            <div class="buttons">
+                <input type="submit" value="Edit Product" name="add" class="button save" />
+                <div @click="deleteProduct" class="deleteBtn button delete">Delete</div>
+            </div>
         </form>
     </div>
 </template>
@@ -54,6 +61,7 @@ export default {
                 this.name = product.name;
                 this.price = product.price;
                 this.gender = product.gender;
+                this.photo = product.photo;
                 for (let i = 0; i < product.sizes.length; i++) {
                     this.sizes.push(product.sizes[i]);
                 }
@@ -74,13 +82,21 @@ export default {
                 formData.append('price', this.price);
                 formData.append('gender', this.gender);
                 formData.append('photo', this.photo);
-
                 formData.append('sizes', JSON.stringify(this.sizes)); // serijalizacija
                 const payload = { formData, id: this.product._id };
                 const response = await ProductsService.editProduct(payload);
                 if (response.status === 200) {
-                    console.log('aaa');
                     this.$router.push(`/products/${this.product._id}`);
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        },
+        async deleteProduct() {
+            try {
+                const response = await ProductsService.deleteProduct(this.product._id);
+                if (response.status === 200) {
+                    this.$router.push({ name: 'Products' });
                 }
             } catch (error) {
                 console.log(error.message);

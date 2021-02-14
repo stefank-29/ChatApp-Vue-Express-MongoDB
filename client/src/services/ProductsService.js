@@ -12,6 +12,9 @@ export default {
             'Content-Type': 'multipart/form-data',
         });
     },
+    deleteProduct(id) {
+        return Api().delete(`/products/${id}`);
+    },
     getProducts() {
         return Api().get('/products');
     },

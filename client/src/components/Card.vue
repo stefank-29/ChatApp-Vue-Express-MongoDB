@@ -2,10 +2,9 @@
     <div>
         <div class="product__hero">
             <router-link :to="`/products/${product._id}`">
-                <!-- <img :src="`./uploads/${product.photo || 'sneaker.jpg'} `" alt="sneaker image" /> -->
-                <img src="@/assets/images/sneaker.jpg" alt="sneaker photo" />
+                <img :src="`./uploads/${product.photo || 'sneaker.jpg'} `" alt="sneaker image" />
+                <!-- <img src="@/assets/images/sneaker.jpg" alt="sneaker photo" /> -->
             </router-link>
-            <!-- :src="product.image !== '' ? product.image : '@/assets/images/sneaker.jpg'" -->
         </div>
         <div class="product__details">
             <div class="product__name">
