@@ -31,7 +31,15 @@ router.post(
     catchErrors(productController.addProduct)
 );
 
+router.post(
+    '/products/:id',
+    productController.upload,
+    productController.resize,
+    catchErrors(productController.editProduct)
+);
+
 router.get('/products/:id', catchErrors(productController.getSingleProduct));
+// router.get('/products/:id/update', catchErrors(productController.getSingleProduct));
 
 router.post('/orders', orderController.downgradeSizes, orderController.addOrder);
 

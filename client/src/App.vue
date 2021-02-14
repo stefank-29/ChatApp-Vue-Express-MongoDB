@@ -12,6 +12,10 @@
 
 <script>
 //todo admin da update-uje i brise tike
+//todo smanjivanje kolicine na frontu (mozda cuvati u localStorage)
+//todo filtracija muske zenske
+//todo validacija front login i register
+//todo home page
 import Header from '@/components/Header';
 import AuthenticationService from '@/services/AuthenticationService';
 import { mapActions } from 'vuex';

@@ -5,6 +5,7 @@
 }
 
 .product {
+    position: relative;
     background-color: white;
     margin: 1.5rem 1.5rem 1.5rem 0;
     width: calc(25% - 2rem);
@@ -62,6 +63,16 @@
         }
     }
     opacity: 0.5;
+    .edit {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        img {
+            width: 20px;
+            height: 20px;
+        }
+        cursor: pointer;
+    }
 }
 
 .topButton {

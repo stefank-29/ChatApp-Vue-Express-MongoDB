@@ -6,6 +6,12 @@ export default {
             'Content-Type': 'multipart/form-data',
         });
     },
+    editProduct({ formData, id }) {
+        // console.log(formData + ' ' + id);
+        return Api().post(`/products/${id}`, formData, {
+            'Content-Type': 'multipart/form-data',
+        });
+    },
     getProducts() {
         return Api().get('/products');
     },

@@ -31,6 +31,11 @@
                 <div class="addToCart" @click="addToCart" ref="addBtn">
                     Add to cart
                 </div>
+                <div v-if="$store.state.isAdmin" class="edit">
+                    <router-link :to="`/products/${product._id}/edit`">
+                        <img src="@/assets/images/edit.png" alt="" />
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>

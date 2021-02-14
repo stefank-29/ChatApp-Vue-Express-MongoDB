@@ -9,6 +9,7 @@ import Products from '../views/Products.vue';
 import Product from '../views/Product.vue';
 import ShoppingCart from '../views/ShoppingCart.vue';
 import Account from '../views/Account.vue';
+import EditProduct from '../views/EditProduct.vue';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,12 @@ const routes = [
         name: 'Add Product',
         beforeEnter: checkAdminRights,
         component: AddProduct,
+    },
+    {
+        path: '/products/:id/edit',
+        name: 'Edit Product',
+        beforeEnter: checkAdminRights,
+        component: EditProduct,
     },
     {
         path: '/products',

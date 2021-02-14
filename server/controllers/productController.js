@@ -63,6 +63,41 @@ exports.addProduct = async (req, res) => {
     res.status(200).send();
 };
 
+exports.editProduct = async (req, res) => {
+    req.body.sizes = JSON.parse(req.body.sizes); // deserijalizacija
+    const sizes = [];
+    let n = 0;
+    if (req.body.gender === 'male' || req.body.gender === 'female') {
+        n = 10;
+    } else {
+        n = 15;
+    }
+    for (let i = 0; i < n; i++) {
+        sizes.push(
+            await new Size({
+                number: req.body.sizes[i].number,
+                quantity: req.body.sizes[i].quantity,
+            }).save()
+        );
+    }
+
+    const product = await Product.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+            name: req.body.name,
+            price: req.body.price,
+            gender: req.body.gender,
+            sizes: sizes,
+            photo: req.body.photo,
+        },
+        {
+            new: true,
+            runValidators: true,
+        }
+    );
+    res.status(200).send();
+};
+
 exports.getProducts = async (req, res) => {
     const products = await Product.find({});
     res.send(products);
