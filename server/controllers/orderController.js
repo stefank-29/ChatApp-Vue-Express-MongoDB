@@ -39,7 +39,7 @@ exports.downgradeSizes = async (req, res, next) => {
         };
         await Size.findOneAndUpdate(
             { _id: size._id },
-            { $set: updates }, // update
+            { $set: updates },
             { new: true, runValidators: true, context: 'query' }
         );
     }
