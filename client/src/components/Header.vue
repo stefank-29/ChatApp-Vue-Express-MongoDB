@@ -13,12 +13,8 @@
                             {{ item.title }}
                         </router-link>
                     </li>
-                    <li class="nav__item">
-                        <router-link
-                            v-if="$store.state.isAdmin"
-                            :to="{ name: 'Add Product' }"
-                            class="nav__link"
-                        >
+                    <li v-if="$store.state.isAdmin" class="nav__item">
+                        <router-link :to="{ name: 'Add Product' }" class="nav__link">
                             Add product
                         </router-link>
                     </li>

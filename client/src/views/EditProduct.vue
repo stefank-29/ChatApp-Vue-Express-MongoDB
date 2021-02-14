@@ -32,7 +32,7 @@
 import ProductsService from '@/services/ProductsService';
 import FormData from 'form-data';
 export default {
-    name: 'AddProduct',
+    name: 'EditProduct',
     data() {
         return {
             name: '',
@@ -40,6 +40,7 @@ export default {
             gender: 'unisex',
             SelectedFile: '',
             sizes: [],
+            photo: '',
             product: null,
         };
     },
@@ -72,6 +73,8 @@ export default {
                 formData.append('name', this.name);
                 formData.append('price', this.price);
                 formData.append('gender', this.gender);
+                formData.append('photo', this.photo);
+
                 formData.append('sizes', JSON.stringify(this.sizes)); // serijalizacija
                 const payload = { formData, id: this.product._id };
                 const response = await ProductsService.editProduct(payload);
