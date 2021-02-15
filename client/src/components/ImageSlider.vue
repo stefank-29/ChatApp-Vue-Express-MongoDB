@@ -2,11 +2,7 @@
     <div id="pageContainer">
         <div id="sliderBg">
             <div id="slider">
-                <!-- <img
-                    :src="`@/assets/images/banners/banner${imageIndex}.jpg`"
-                    alt="image of nature"
-                /> -->
-                <img :src="`/banners/banner${imageIndex}.jpg`" alt="banner" />
+                <img :src="`/banners/banner${imageIndex}.jpg`" alt="banner" ref="imageSlider" />
                 <span @click="previousImage" class="arrow" id="left"
                     ><i class="fas fa-chevron-left"></i
                 ></span>
@@ -15,6 +11,7 @@
                 ></span>
                 <div id="dots">
                     <i
+                        @click="showImageOnDot(index)"
                         :class="circleClass(index)"
                         v-for="index in 8"
                         :key="index"
@@ -32,7 +29,7 @@ export default {
     data() {
         return {
             imageIndex: 1,
-            interval: null,
+            interval: 0,
         };
     },
     methods: {
@@ -41,9 +38,9 @@ export default {
                 'fa-dot-circle': this.imageIndex === index,
             };
         },
-        showNextImg5sec() {
-            clearInterval(interval);
-            interval = setInterval(nextImage, 5000);
+        showNextImg3sec() {
+            clearInterval(this.interval);
+            this.interval = setInterval(this.nextImage, 2500);
         },
 
         previousImage() {
@@ -52,15 +49,13 @@ export default {
             } else {
                 this.imageIndex = 8;
             }
-
-            sliderImage.setAttribute('src', `./images/cover${imageIndex}.jpg`);
-            sliderImage.classList.remove('show');
+            const imageSlider = this.$refs.imageSlider;
+            imageSlider.classList.remove('show');
             setTimeout(function() {
-                //! forica da se skine i prikaze klasa
-                sliderImage.classList.add('show');
+                imageSlider.classList.add('show');
             }, 1);
 
-            showNextImg5sec();
+            this.showNextImg3sec();
         },
 
         nextImage() {
@@ -69,28 +64,37 @@ export default {
             } else {
                 this.imageIndex = 1;
             }
-
-            sliderImage.setAttribute('src', `./images/cover${imageIndex}.jpg`);
-            sliderImage.classList.remove('show');
+            const imageSlider = this.$refs.imageSlider;
+            imageSlider.classList.remove('show');
             setTimeout(function() {
-                sliderImage.classList.add('show');
+                imageSlider.classList.add('show');
             }, 1);
 
-            showNextImg5sec();
+            this.showNextImg3sec();
         },
 
-        showImageOnDot(dot) {
-            const dotIndex = dot.dataset.index;
-            imageIndex = dotIndex;
-            _deactivateAllDots();
-            sliderImage.setAttribute('src', `./images/cover${imageIndex}.jpg`);
-            sliderImage.classList.remove('show');
+        showImageOnDot(index) {
+            this.imageIndex = index;
+            const imageSlider = this.$refs.imageSlider;
+            imageSlider.classList.remove('show');
             setTimeout(function() {
-                sliderImage.classList.add('show');
+                imageSlider.classList.add('show');
             }, 1);
-            _activateDot();
-            showNextImg5sec();
+
+            this.showNextImg3sec();
         },
+        changeImageOnButton(e) {
+            if (e.key === 'ArrowLeft') {
+                this.previousImage();
+            }
+            if (e.key === 'ArrowRight') {
+                this.nextImage();
+            }
+        },
+    },
+    created() {
+        this.showNextImg3sec();
+        window.addEventListener('keydown', this.changeImageOnButton);
     },
 };
 </script>
