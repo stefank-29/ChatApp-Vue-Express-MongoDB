@@ -1,5 +1,6 @@
 <template>
     <div class="home">
+        <div class="flux">Sneakers Shop</div>
         <ImageSlider />
     </div>
 </template>
