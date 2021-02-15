@@ -1,0 +1,88 @@
+// #pageContainer {
+//     height: 100vh;
+//     width: 100vw;
+//     position: relative;
+// }
+
+#sliderBg {
+    position: absolute;
+    bottom: 5rem;
+    width: 100%;
+    height: 77vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: none;
+}
+
+#slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(82, 80, 80);
+    display: flex;
+    box-shadow: 0 0 7px 2px rgba(71, 10, 10, 0.8);
+}
+#slider img {
+    width: 100%;
+    height: 100%;
+    /* animation: showPic 0.7s ease-in-out 1 forwards; */
+}
+.arrow {
+    font-size: 3rem;
+    color: $lightblue;
+}
+
+.arrow:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 2px rgba(71, 10, 10, 0.8);
+}
+
+#left {
+    position: absolute;
+    left: 2rem;
+    top: 48%;
+    cursor: pointer;
+}
+
+#right {
+    position: absolute;
+    right: 2rem;
+    top: 48%;
+    cursor: pointer;
+}
+
+#dots {
+    position: absolute;
+    bottom: 2rem;
+    /*za centriranje*/
+    /*ovo se odnosi na roditelja*/
+    left: 50%;
+    /*ovo se odnosi na element*/
+    transform: translate(-50%, 0);
+    cursor: default;
+}
+
+#dots * {
+    cursor: pointer;
+    font-size: 2.5rem;
+    margin-right: 0.5rem;
+    color: $lightblue;
+    /* transition: all 0.7s ease-in-out; */
+}
+#dots *:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 2px rgba(71, 10, 10, 0.8);
+}
+.show {
+    animation: showPic 1s linear 1 forwards;
+}
+/**********************/
+@keyframes showPic {
+    0% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
+}
