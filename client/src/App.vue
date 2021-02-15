@@ -11,7 +11,6 @@
 </template>
 
 <script>
-//todo smanjivanje kolicine na frontu (mozda cuvati u localStorage)
 //todo filtracija muske zenske
 //todo validacija front login i register
 //todo home page

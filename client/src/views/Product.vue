@@ -57,7 +57,7 @@ export default {
         ...mapActions(['addProductToCart']),
         ...mapGetters(['cartItemsNum']),
         selectSize(size, index) {
-            if (size.quantity === 0) {
+            if (size.quantity <= 0) {
                 // out of stock
                 return;
             }
@@ -71,7 +71,7 @@ export default {
         sizeClass(size, index) {
             return {
                 'sizes__size--selected': this.selectedIndex === index,
-                'sizes__size--out_of_stock': size.quantity === 0,
+                'sizes__size--out_of_stock': size.quantity <= 0,
             };
         },
         toggleButton() {
@@ -87,6 +87,10 @@ export default {
                 this.$refs.addBtn.textContent = 'Choose size';
                 return;
             }
+            if (this.product.sizes[this.selectedIndex].quantity === 0) {
+                return;
+            }
+            this.product.sizes[this.selectedIndex].quantity -= 1;
             const payload = { product: this.product, size: { ...this.selectedSize } };
             this.addProductToCart(payload);
             this.toggleButton();

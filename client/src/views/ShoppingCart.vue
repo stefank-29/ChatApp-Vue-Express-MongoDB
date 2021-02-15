@@ -25,11 +25,11 @@
 
             <div v-for="(item, index) in items" :key="index" class="cart_item">
                 <div class="cart_item__img">
-                    <!-- <img
+                    <img
                         :src="`/uploads/${item.product.photo || 'sneaker.jpg'}`"
                         alt="sneaker photo"
-                    /> -->
-                    <img src="@/assets/images/sneaker.jpg" alt="sneaker photo" />
+                    />
+                    <!-- <img src="@/assets/images/sneaker.jpg" alt="sneaker photo" /> -->
                 </div>
                 <div class="cart_item__details">
                     <p>{{ item.product.name }}</p>
