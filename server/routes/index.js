@@ -20,6 +20,7 @@ router.post('/login', authController.login, authController.sendUser);
 router.get('/logout', authController.logout);
 
 router.get('/user', authController.isUserLoggedIn);
+router.get('/users', userController.getUsers);
 
 // Products
 
@@ -44,5 +45,7 @@ router.delete('/products/:id', catchErrors(productController.deleteProduct));
 // router.get('/products/:id/update', catchErrors(productController.getSingleProduct));
 
 router.post('/orders', orderController.downgradeSizes, orderController.addOrder);
+
+router.get('/orders', catchErrors(orderController.getOrders));
 
 module.exports = router;

@@ -1,63 +1,123 @@
 <template>
     <div class="inner">
-        <form @submit.prevent="register" action="/register" class="form__register card">
-            <h2>Register</h2>
-            <div class="form__block">
-                <label for="name">Name*</label>
-                <input v-model="name" type="text" name="name" required />
-            </div>
-            <div class="form__block">
-                <label for="surname">Surname*</label>
-                <input v-model="surname" type="text" name="surname" required />
-            </div>
-            <div class="form__block">
-                <label for="email">Email*</label>
-                <input v-model="email" type="email" name="email" required />
-            </div>
-            <div class="form__block">
-                <label for="text">Phone number*</label>
-                <input v-model="phone" type="text" name="phone" required />
-            </div>
-            <div class="form__block">
-                <label for="text">City*</label>
-                <input v-model="city" type="text" name="city" required />
-            </div>
-            <div class="form__block">
-                <label for="text">Zip Code*</label>
-                <input v-model="zip" type="text" name="zip" required />
-            </div>
-            <div class="form__block">
-                <label for="text">Street*</label>
-                <input v-model="street" type="text" name="street" required />
-            </div>
-            <div class="form__block">
-                <label for="text">Street number*</label>
-                <input v-model="street_number" type="text" name="street_number" required />
-            </div>
-            <div class="form__block">
-                <label for="password">Password*</label>
-                <input v-model="password" type="password" name="password" required />
-            </div>
-            <div class="form__block">
-                <label for="password-confirm">Confirm Password*</label>
-                <input
-                    v-model="confirm_password"
-                    type="password"
-                    name="password-confirm"
-                    required
-                />
-            </div>
+        <ValidationObserver tag="form" v-slot="{ handleSubmit }">
+            <form
+                @submit.prevent="handleSubmit(register)"
+                autocomplete="off"
+                action="/register"
+                class="form__register card"
+            >
+                <h2>Register</h2>
+                <div class="form__block">
+                    <validation-provider rules="required" v-slot="{ errors }">
+                        <label for="name">Name*</label>
+                        <input v-model="name" type="text" name="name" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
+                <div class="form__block">
+                    <validation-provider rules="required" v-slot="{ errors }">
+                        <label for="surname">Surname*</label>
+                        <input v-model="surname" type="text" name="surname" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
+                <div class="form__block">
+                    <validation-provider rules="required|email" v-slot="{ errors }">
+                        <label for="email">Email*</label>
+                        <input v-model="email" type="email" name="email" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
+                <div class="form__block">
+                    <validation-provider rules="required" v-slot="{ errors }">
+                        <label for="text">Phone number*</label>
+                        <input v-model="phone" type="text" name="phone" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
+                <div class="form__block">
+                    <validation-provider rules="required" v-slot="{ errors }">
+                        <label for="text">City*</label>
+                        <input v-model="city" type="text" name="city" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
+                <div class="form__block">
+                    <validation-provider rules="required" v-slot="{ errors }">
+                        <label for="text">Zip Code*</label>
+                        <input v-model="zip" type="text" name="zip" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
+                <div class="form__block">
+                    <validation-provider rules="required" v-slot="{ errors }">
+                        <label for="text">Street*</label>
+                        <input v-model="street" type="text" name="street" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
+                <div class="form__block">
+                    <validation-provider rules="required" v-slot="{ errors }">
+                        <label for="text">Street number*</label>
+                        <input v-model="street_number" type="text" name="street_number" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
+                <div class="form__block">
+                    <validation-provider rules="required|password" v-slot="{ errors }">
+                        <label for="password">Password*</label>
+                        <input v-model="password" type="password" name="password" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
+                <div class="form__block">
+                    <validation-provider rules="required" v-slot="{ errors }">
+                        <label for="password-confirm">Confirm Password*</label>
+                        <input v-model="confirm_password" type="password" name="password-confirm" />
+                        <div class="error">{{ errors[0] }}</div>
+                    </validation-provider>
+                </div>
 
-            <input type="submit" value="Register" name="register" class="button save" />
-        </form>
+                <input type="submit" value="Register" name="register" class="button save" />
+            </form>
+        </ValidationObserver>
     </div>
 </template>
 
 <script>
+//  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
 import AuthenticationService from '@/services/AuthenticationService';
 import { mapActions, mapState } from 'vuex';
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
+import { required, email, regex } from 'vee-validate/dist/rules';
+import { Validator } from 'vee-validate';
+
+extend('required', {
+    ...required,
+    message: 'This field is required',
+});
+
+extend('email', {
+    ...email,
+    message: 'Please insert a valid email address',
+});
+extend('regex', {
+    ...regex,
+    message: 'Aloooo',
+});
+
+extend('password', {
+    getMessage: () => 'One uppercase character',
+    validate: (value) => value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/) !== null,
+});
+
 export default {
     name: 'Register',
+    components: {
+        ValidationProvider,
+        ValidationObserver,
+    },
     data() {
         return {
             name: '',

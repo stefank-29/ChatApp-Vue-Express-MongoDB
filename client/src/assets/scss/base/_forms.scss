@@ -92,3 +92,12 @@ input.button.save:hover {
 input.button:hover {
     background-color: rgb(199, 67, 67);
 }
+
+.error {
+    font-size: 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: left;
+    color: $red;
+}

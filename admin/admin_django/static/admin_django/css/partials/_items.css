@@ -1,0 +1,39 @@
+.item {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    background-color: rgba(24, 176, 214, 0.3);
+}
+.item.orders {
+    display: flex;
+}
+.item p {
+    font-size: 1.7rem;
+}
+.item .name {
+    font-size: 2.5rem;
+}
+
+.item .price {
+    font-size: 2rem;
+}
+.sizes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+}
+.size {
+    margin: 0.5rem 1rem;
+    padding: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(177, 8, 8, 0.3);
+}
+.email {
+    font-size: 1.8rem;
+    color: rgba(0, 0, 0, 0.8);
+}

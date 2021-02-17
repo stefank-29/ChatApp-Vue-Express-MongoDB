@@ -45,3 +45,36 @@ exports.downgradeSizes = async (req, res, next) => {
     }
     next();
 };
+
+exports.getOrders = async (req, res) => {
+    //!!!!!!!
+    let orders = await Order.find().lean();
+    for (let k = 0; k < orders.length; k++) {
+        orders[k].itemss = [];
+    }
+    let i = 0;
+    // !
+    for (let i = 0; i < orders.length; i++) {
+        for (let j = 0; j < orders[i].items.length; j++) {
+            const product = await Product.find({ _id: orders[i].items[j][0] });
+            const size = await Size.find({ _id: orders[i].items[j][1] });
+            orders[i].itemss.push({ product, size });
+        }
+    }
+    // await orders.forEach(async (order, index) => {
+    //     // const product = await Product.find({ _id: order.items[1][0] });
+    //     // const size = await Size.find({ _id: order.items[0][1] });
+    //     // orders[i].items.push({ product, size });
+    //     // i++;4
+    //     await order.items.forEach(async (item) => {
+    //         const product = await Product.find({ _id: item[0] });
+    //         const size = await Size.find({ _id: item[1] });
+    //         // console.log(orders[index]);
+    //         orders[index].itemss.push({ product: product, size: size });
+    //     });
+    //     i++;
+    // });
+
+    console.log(orders);
+    res.send(orders);
+};

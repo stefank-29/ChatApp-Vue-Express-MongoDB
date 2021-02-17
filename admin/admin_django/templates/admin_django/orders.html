@@ -1,0 +1,32 @@
+{% extends 'admin_django/base.html' %} {% load static %} {% block content %}
+<div class="inner">
+    <h2>Orders</h2>
+    {% if orders %} 
+        {% for order in orders %}
+            <div class="item orders">
+                <div class="details">
+                    <p class="name">{{order.name}} {{order.surname}}</p>
+                    <p class="email">Email: {{order.email}}</p>
+                    <p class="email">Phone number: {{order.phone}}</p>
+                    <p class="email">City: {{order.city}}</p>
+                    <p class="email">Zip: {{order.zip}}</p>
+                    <p class="email">Street: {{order.street}}</p>
+                    <p class="email">Street Number: {{order.streetNumber}}</p>
+                </div>
+                <div class="order_items">
+                    {% for item in order.itemss %}
+                        {% if item.product %}
+                        
+                        <div class='itemm'>
+                            <p>Product: {{item.product.0.name}}</p>
+                            <p>Size: {{item.size.0.number}}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="total">{{order.total}} $</div>
+            </div>
+            {% endfor %}    
+        {% endif %}
+</div>
+{% endblock content %}

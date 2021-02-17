@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin dashboard</title>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'admin_django/css/style.css' %}" />
+        <link
+            rel="shortcut icon"
+            type="image/png"
+            href="{% static 'blog/images/icons/blogger.png' %}"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="styelsheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&amp;display=swap"
+            type="text/css"
+        />
+    </head>
+    <body>
+        <div class="menu">
+            <a href="/products">
+                Products
+            </a>
+            <a href="/users">
+                Users
+            </a>
+            <a href="/orders">
+                Orders
+            </a>
+        </div>
+        {% comment %}
+        <header class="top">
+            <nav class="nav">
+                <div class="nav__section nav__section--pages">
+                    <li class="nav__item">
+                        <a class="nav__link nav__link--logo" href="{% url 'blog-home' %}">
+                            <img src="{% static 'blog/images/icons/logo.svg' %}" alt="blog logo" />
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a
+                            class="nav__link nav__link{% if '/blogs' in request.path %}--active{% endif %}"
+                            href="/blogs"
+                        >
+                            <img src="{% static 'blog/images/icons/blog.svg' %}" alt="" />
+                            <span>Blogs</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a
+                            class="nav__link nav__link{% if request.path == '/myblogs' %}--active{% endif %}"
+                            href="/myblogs"
+                        >
+                            <img src="{% static 'blog/images/icons/blogs.svg' %}" alt="" />
+                            <span>My Blogs</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a
+                            class="nav__link nav__link{% if '/add/' in request.path %}--active{% endif %}"
+                            href="{% url 'blog-create' %}"
+                        >
+                            <img src="{% static 'blog/images/icons/add.svg' %}" alt="" />
+                            <span>Add</span>
+                        </a>
+                    </li>
+                </div>
+                <div class="nav__section nav__section--user">
+                    {% if user.is_authenticated %}
+                    <li class="nav__item">
+                        <a
+                            class="nav__link nav__link{% if '/logout' in request.path %}--active{% endif %}"
+                            href="{% url 'logout' %}"
+                        >
+                            <img src="{% static 'blog/images/icons/logout.svg' %}" alt="" />
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a
+                            class="nav__link nav__link{% if 'profile' in request.path %}--active{% endif %}"
+                            href="{% url 'profile' %}"
+                        >
+                            <img
+                                class="avatar"
+                                src="{{ user.profile.image.url }}"
+                                alt="users profile"
+                            />
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav__item">
+                        <a
+                            class="nav__link nav__link{% if '/register' in request.path %}--active{% endif %}"
+                            href="{% url 'register' %}"
+                            >Register</a
+                        >
+                    </li>
+                    <li class="nav__item">
+                        <a
+                            class="nav__link nav__link{% if '/login' in request.path %}--active{% endif %}"
+                            href="{% url 'login' %}"
+                            >Log In</a
+                        >
+                    </li>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+        {% endcomment %}
+
+        <div class="content">{% block content %} {% endblock content %}</div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    </body>
+</html>

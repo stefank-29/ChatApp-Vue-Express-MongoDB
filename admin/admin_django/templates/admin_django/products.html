@@ -1,0 +1,23 @@
+{% extends 'admin_django/base.html' %} {% load static %} {% block content %}
+
+<div class="inner">
+    <h2>Products</h2>
+        {% if products %} 
+            {% for product in products %}
+            <div class="item">
+                <p class='name'>{{product.name}}</p>
+                <p class='price'> {{product.price}} $</p>
+                <p>{{product.gender}}</p>
+                <p>Sizes:</p>
+                <div class='sizes'>
+                    {% for size in product.sizes %}</p>
+                        <p class='size'>{{ size.number}} : {{ size.quantity }}</p>
+                    {% endfor %}
+                </div>
+            
+            </div>
+            {% endfor %}
+
+        {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends 'admin_django/base.html' %} {% load static %} {% block content %}
+<div class="inner">
+    <h2>Users</h2>
+        {% if users %} 
+        {% for user in users %}
+            <div class="item">
+                <p class="name">{{user.name}} {{user.surname}}</p>
+                <p class="email">Email: {{user.email}}</p>
+                <p class="email">Phone number: {{user.phone}}</p>
+                <p class="email">City: {{user.city}}</p>
+                <p class="email">Zip: {{user.zip}}</p>
+                <p class="email">Street: {{user.street}}</p>
+                <p class="email">Street Number: {{user.streetNumber}}</p>
+            </div>
+            {% endfor %}    
+        {% endif %}
+</div>
+{% endblock content %}

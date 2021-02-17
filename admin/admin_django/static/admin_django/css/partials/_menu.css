@@ -1,0 +1,34 @@
+html {
+    padding: 0 !important;
+    margin: 0;
+}
+.menu {
+    margin-top: -3rem;
+    position: fixed;
+    height: 100%;
+    width: 15%;
+    background-color: rgba(20, 114, 121, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 8rem 4rem 4rem;
+}
+.menu a {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    color: white;
+}
+
+.menu a:hover,
+.menu__link--active {
+    text-shadow: 0 0 2px whitesmoke;
+    text-decoration: underline whitesmoke !important;
+}
+.menu p {
+    margin: 0;
+    color: white;
+    font-size: 3rem;
+    font-family: 'Roboto', sans-serif;
+}

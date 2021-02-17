@@ -72,3 +72,8 @@ exports.updateAccount = async (req, res) => {
 
     res.send({ user: user, error: false, gravatar: user.gravatar });
 };
+
+exports.getUsers = async (req, res) => {
+    const users = await User.find();
+    res.send(users);
+};

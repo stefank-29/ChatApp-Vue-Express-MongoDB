@@ -100,7 +100,7 @@ exports.editProduct = async (req, res) => {
 };
 
 exports.getProducts = async (req, res) => {
-    const products = await Product.find({});
+    const products = await Product.find({}).populate('sizes');
     res.send(products);
 };
 
